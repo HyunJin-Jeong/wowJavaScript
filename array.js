@@ -21,7 +21,7 @@ for (let fruit of fruits) {
     console.log(fruit);
 }
 
-fruits.forEach((fruit, index) => console.log(fruit));
+fruits.forEach((fruit) => console.log(fruit));
 
 // 4. Addtion, deletion, copy
 // push: add an item to the end
