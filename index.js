@@ -79,35 +79,4 @@ const hyunjin = new Person('hyunjin', 21);
 console.log(hyunjin.name);
 console.log(hyunjin.age);
 hyunjin.speak();
-
-
-function calculator(cmd, a, b){
-    switch (cmd){
-        case 'add':
-            return a + b;
-            break;
-        
-        case 'substract':
-            return a - b;
-            break;
-        
-        case 'divide':
-            return a / b;
-            break;
-        
-        case 'multiply':
-            return a * b;
-            break;
-        
-        case 'remainder':
-            return a % b;
-            break;
-        
-        default:
-            throw Error('unkown command');
-            break;
-    }
-}
-
-console.log(calculator('multiply', 321, 23));
 */
