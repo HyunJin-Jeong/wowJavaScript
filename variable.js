@@ -3,7 +3,7 @@
 // use this for Valina JavaScript
 'use strict';
 
-// 2. Variable
+// 2. Variable (read/write)
 // let (added in ES6)
 let globalName = 'global name';
 {
@@ -26,7 +26,9 @@ console.log(age);
 }
 console.log(test);
 
-// 3. Contants
+// 3. Contants (read only)
+// use const whenever possible
+// only use let if variable needs to change.
 // favor immutable data type always for a few reasons:
 //  - security
 //  - thread safety
