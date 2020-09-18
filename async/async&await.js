@@ -8,7 +8,7 @@ async function fetUser() {
 /*
 function fetchUser() {
     return new Promise((resolve, reject) => {
-        resolve('hyunjin);
+        resolve('hyunjin');
     });
 }
 */
