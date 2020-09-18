@@ -5,6 +5,13 @@
 async function fetUser() {
     return 'hyunjin';
 }
+/*
+function fetchUser() {
+    return new Promise((resolve, reject) => {
+        resolve('hyunjin);
+    });
+}
+*/
 
 const user = fetUser();
 user.then(console.log);
