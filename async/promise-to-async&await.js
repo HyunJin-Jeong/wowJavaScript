@@ -27,10 +27,11 @@ class UserStorage {
     }
 }
 
-const userStorage = new UserStorage();
+// const userStorage = new UserStorage();
 const id = prompt('enter your id');
 const password = prompt('enter your password');
-userStorage.loginUser(id, password)
+/* userStorage.loginUser(id, password)
     .then(userStorage.getRoles)
     .then(user => alert(`${user.name}, you have a ${user.role} role`))
     .catch(console.log);
+*/
