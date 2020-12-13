@@ -3,11 +3,14 @@ import './App.css';
 
 import TOC from './components/TOC';
 import Subject from './components/Subject';
-import Content from './components/Content'
+import ReadContent from './components/ReadContent';
+import CreateContent from './components/CreateContent';
+import Control from './components/Control';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.maxContentID = 3;
     this.state = {
       mode: "welcome",
       selectedID: 1,
@@ -24,21 +27,35 @@ class App extends React.Component {
         { id: 2, title: "CSS", description:"CSS is for design" },
         { id: 3, title: "Javscript", description:"Javascript is for interactive" },
       ],
-    }
+    };
   }
 
   render() {
-    let title, description = "";
+    let title, description, article = "";
     if (this.state.mode === "welcome") {
       title = this.state.welcome.title;
       description = this.state.welcome.description;
+      article = <ReadContent title={title} description={description}></ReadContent>
     } else if (this.state.mode === "read") {
       this.state.contents.forEach(content => {
         if (content.id === this.state.selectedID) {
           title = content.title;
           description = content.description;
+          article = <ReadContent title={title} description={description}></ReadContent>
         }
       })
+    } else if (this.state.mode === "create") {
+      article = <CreateContent onSubmit={function(_title, _description) {
+        this.maxContentID ++;
+        const contents = this.state.contents.concat({
+          id: this.maxContentID,
+          title: _title,
+          description: _description,
+        });
+        this.setState({
+          contents,
+        });
+      }.bind(this)}></CreateContent>
     }
     return (
       <div className="App">
@@ -54,12 +71,17 @@ class App extends React.Component {
           data={this.state.contents}
           onChangePage={function(id) {
             this.setState({
-                mode: "read",
-                selectedID: Number(id),
+              mode: "read",
+              selectedID: Number(id),
             });
           }.bind(this)}
-        ></TOC>
-        <Content title={title} description={description}></Content>
+        >
+        </TOC>
+        <Control onChangeMode={function(mode) {
+          this.setState({mode})
+        }.bind(this)}></Control>
+        {article}
+        {/* <ReadContent title={title} description={description}></ReadContent> */}
       </div>
     );
   }
