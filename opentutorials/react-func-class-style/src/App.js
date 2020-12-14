@@ -2,11 +2,24 @@ import React, { useEffect } from 'react';
 import './App.css';
 
 function App() {
+  const [funcShow, setFuncShow] = React.useState(true);
+  const [classShow, setClassShow] = React.useState(true);
+
   return (
     <div className="container">
       <h1>Components</h1>
-      <FunctionComponent initNumber={2}></FunctionComponent>
-      <ClassComponent initNumber={2}></ClassComponent>
+      <input type="button" value="remove func" onClick={
+        function() {
+          setFuncShow(false);
+        }
+      }></input>
+      <input type="button" value="remove class" onClick={
+        function() {
+          setClassShow(false);
+        }
+      }></input>
+      { funcShow === true ? <FunctionComponent initNumber={2}></FunctionComponent> : null }
+      { classShow === true ? <ClassComponent initNumber={2}></ClassComponent> : null }
     </div>
   );
 }
