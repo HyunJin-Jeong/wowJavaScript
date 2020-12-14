@@ -5,6 +5,7 @@ import TOC from './components/TOC';
 import Subject from './components/Subject';
 import ReadContent from './components/ReadContent';
 import CreateContent from './components/CreateContent';
+import UpdateContent from './components/UpdateContent';
 import Control from './components/Control';
 
 class App extends React.Component {
@@ -30,20 +31,19 @@ class App extends React.Component {
     };
   }
 
-  render() {
+  getReadContent() {
+    return this.state.contents.filter(content => content.id === this.state.selectedID)[0]
+  };
+
+  getContent() {
     let title, description, article = "";
     if (this.state.mode === "welcome") {
       title = this.state.welcome.title;
       description = this.state.welcome.description;
       article = <ReadContent title={title} description={description}></ReadContent>
     } else if (this.state.mode === "read") {
-      this.state.contents.forEach(content => {
-        if (content.id === this.state.selectedID) {
-          title = content.title;
-          description = content.description;
-          article = <ReadContent title={title} description={description}></ReadContent>
-        }
-      })
+      const contents = this.getReadContent();
+      article = <ReadContent title={contents.title} description={contents.description}></ReadContent>
     } else if (this.state.mode === "create") {
       article = <CreateContent onSubmit={function(_title, _description) {
         this.maxContentID ++;
@@ -56,7 +56,14 @@ class App extends React.Component {
           contents,
         });
       }.bind(this)}></CreateContent>
+    } else if (this.state.mode === "update") {
+      article = <UpdateContent onSubmit={function(){
+      }.bind(this)}></UpdateContent>
     }
+    return article;
+  }
+
+  render() {
     return (
       <div className="App">
         <Subject
@@ -80,8 +87,7 @@ class App extends React.Component {
         <Control onChangeMode={function(mode) {
           this.setState({mode})
         }.bind(this)}></Control>
-        {article}
-        {/* <ReadContent title={title} description={description}></ReadContent> */}
+        {this.getContent()}
       </div>
     );
   }
